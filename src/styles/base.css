@@ -1,0 +1,39 @@
+:root {
+  --midnight: #08090D;
+  --obsidian: #111218;
+  --charcoal: #202127;
+  --grey: #777982;
+  --moon: #F2F0EA;
+  --red: #E52432;
+
+  --f-display: 'Bebas Neue', 'Barlow Condensed', Impact, 'Arial Narrow', sans-serif;
+  --f-pop: 'Anton', 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  --f-body: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'Space Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--midnight); }
+body {
+  margin: 0;
+  background: var(--midnight);
+  color: var(--moon);
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+svg { display: block; }
+:focus-visible { outline: 3px solid var(--moon); outline-offset: 5px; }
+
+/* Print grain over everything: static, no animation */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 200; pointer-events: none; opacity: .09;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
