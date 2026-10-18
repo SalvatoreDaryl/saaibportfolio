@@ -135,6 +135,19 @@ export const sfx = {
     o.start(t);
     o.stop(t + 0.4);
   },
+  /* tiny typewriter blip for the cat's dialogue */
+  blip() {
+    if (!ready()) return;
+    tone('square', 700 + Math.random() * 200, null, ctx.currentTime, 0.03, 0.022);
+  },
+  /* ninjutsu smoke poof */
+  poof() {
+    if (!ready()) return;
+    const t = ctx.currentTime;
+    noise(t, 0.4, 0.5, 2200, 260, 0.7);
+    tone('sine', 480, 80, t, 0.32, 0.18);
+    noise(t + 0.14, 0.26, 0.3, 3400, 900, 1);
+  },
   /* very quiet zing for shooting stars */
   star() {
     if (!ready()) return;

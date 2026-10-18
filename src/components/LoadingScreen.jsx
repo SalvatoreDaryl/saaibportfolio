@@ -1,29 +1,21 @@
-import { useEffect } from 'react';
 import NinjaCat from './NinjaCat.jsx';
-import { sfx } from '../audio/sfx.js';
 
 const CELLS = 10;
 
-/* Short interstitial: red wipe, stepped progress, label. `onDone` fires after `duration`. */
-export default function LoadingScreen({ text = 'ENTERING THE CITY....', duration = 1100, onDone }) {
-  useEffect(() => { sfx.whoosh(); }, []);
-
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const t = setTimeout(onDone, reduced ? 350 : duration);
-    return () => clearTimeout(t);
-  }, [duration, onDone]);
-
+/* Cover shown while a page is invoked. App mounts the next page underneath, waits until it is fully
+   ready (fonts + painted frames), then lets this cover slide away. phase: in | hold | out. */
+export default function LoadingScreen({ text = 'LOADING...', phase = 'hold' }) {
   return (
-    <section className="loading" role="status" aria-live="polite" aria-label={text}>
-      <div className="loading__wipe" aria-hidden />
+    <section className={`loading loading--${phase}`} role="status" aria-live="polite" aria-label={text}>
+      <i className="loading__edge loading__edge--l" aria-hidden />
+      <i className="loading__edge loading__edge--r" aria-hidden />
       <div className="loading__slash" aria-hidden />
       <NinjaCat pose="stand" className="loading__cat" decorative />
       <div className="loading__copy">
         <p className="loading__tag">NOW LOADING</p>
         <h1 className="loading__text">{text}</h1>
         <div className="loading__bar" aria-hidden>
-          {Array.from({ length: CELLS }, (_, i) => <i key={i} style={{ animationDelay: `${(i * duration * 0.8) / CELLS}ms` }} />)}
+          {Array.from({ length: CELLS }, (_, i) => <i key={i} style={{ animationDelay: `${i * 60}ms` }} />)}
         </div>
       </div>
     </section>

@@ -30,6 +30,12 @@ function Head() {
       </g>
 
       <polygon points="116,126 124,126 120,132" fill={MOON} />
+      <g className="cat__mouth-talk">
+        <g className="cat__jaw">
+          <path d="M105 135 Q120 154 135 135 Z" fill="#08090D" stroke={MOON} strokeWidth="2.6" strokeLinejoin="round" />
+          <path d="M112 143 Q120 150 128 143 Z" fill={RED} />
+        </g>
+      </g>
       <path className="cat__mouth-idle" d="M106 136 L114 142 L120 136 L126 142 L134 136" fill="none" stroke={MOON} strokeWidth="2.5" />
       <g className="cat__mouth-happy">
         <path d="M104 134 Q120 154 136 134 Z" fill={MOON} stroke={MOON} strokeWidth="2" />
@@ -51,9 +57,9 @@ function Scarf({ y = 0 }) {
 
 const limb = { fill: BODY, stroke: MOON, strokeWidth: 4, strokeLinejoin: 'round' };
 
-export default function NinjaCat({ pose = 'peek', className = '', label = 'Ninja cat mascot', happy = false, decorative = false }) {
+export default function NinjaCat({ pose = 'peek', className = '', label = 'Ninja cat mascot', happy = false, talking = false, decorative = false }) {
   const a11y = decorative ? { 'aria-hidden': true } : { role: 'img', 'aria-label': label };
-  const cls = `cat cat--${pose} ${happy ? 'cat--happy' : ''} ${className}`;
+  const cls = `cat cat--${pose} ${happy ? 'cat--happy' : ''} ${talking ? 'cat--talk' : ''} ${className}`;
 
   if (pose === 'peek') {
     return (

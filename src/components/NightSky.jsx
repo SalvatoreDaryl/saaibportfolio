@@ -18,7 +18,7 @@ export default function NightSky({ className = '' }) {
     let w = 0; let h = 0; let raf = 0; let last = 0; let t = 0;
     let stars = []; let clouds = []; const shooters = []; let plane = null;
     let nextShot = 1.5; let nextPlane = 6;
-    let px = 0; let py = 0; let tx = 0; let ty = 0; let lastPx = 99;
+    let px = 0; let py = 0; let tx = 0; let ty = 0;
 
     const seed = () => {
       const n = Math.max(90, Math.min(420, Math.floor((w * h) / 4800)));
@@ -164,7 +164,6 @@ export default function NightSky({ className = '' }) {
       last = now;
       px += (tx - px) * Math.min(1, dt * 3);
       py += (ty - py) * Math.min(1, dt * 3);
-      if (Math.abs(px - lastPx) > 0.004) { parent.style.setProperty('--px', px.toFixed(3)); lastPx = px; }
       nextShot -= dt; nextPlane -= dt;
       if (nextShot <= 0) {
         shooters.push({ x: w * (0.3 + Math.random() * 0.7), y: Math.random() * h * 0.35, vx: -(380 + Math.random() * 420), vy: 160 + Math.random() * 200, life: 0, max: 0.9 + Math.random() * 0.6, red: Math.random() < 0.22 });
